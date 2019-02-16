@@ -1,0 +1,6 @@
+﻿  Main.cpp
+c:\users\azat\desktop\cg2\projectgui\main.cpp(71): warning C4838: преобразование из "double" в "GLfloat" требует сужающего преобразования
+c:\users\azat\desktop\cg2\projectgui\main.cpp(672): warning C4838: преобразование из "double" в "GLfloat" требует сужающего преобразования
+c:\users\azat\desktop\cg2\projectgui\main.cpp(674): warning C4838: преобразование из "double" в "GLfloat" требует сужающего преобразования
+  ProjectGUI.vcxproj -> C:\Users\Azat\Desktop\CG2\ProjectGUI\Debug\ProjectGUI.exe
+  ProjectGUI.vcxproj -> C:\Users\Azat\Desktop\CG2\ProjectGUI\Debug\ProjectGUI.pdb (Partial PDB)
