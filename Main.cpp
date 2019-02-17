@@ -45,7 +45,7 @@ int  xRotation = 0, yRotation = 0, zRotation = 0;
 
 int ff = 0; //Fog type
 double fogStart = 1.0, fogEnd = 3.0, fogDensity = 0.3;
-GLfloat fogColor[4] = { 0.0, 0.0, 0.5, 1.0f }; // Цвет тумана
+GLfloat fogColor[4] = { 0.0, 0.0, 0.5, 1.0f }; //Fog color
 
 bool translationSettings = false, rotationSettings = false, scaleSettings = false, idleRotation = false;
 bool cameraSettings = false;
@@ -369,7 +369,7 @@ void drawButton(double x, double y,double width,double height,char* str) {
 	drawBox(x, y, 1, width, height, 2);
 }
 
-void drawPP_WT(double x, double y, double z, double xlen, double ylen, double zlen, unsigned int tex) {
+void drawPP_WT(double x, double y, double z, double xlen, double ylen, double zlen, unsigned int tex) {//Draws textured box
 
 	glBindTexture(GL_TEXTURE_2D, tex);//Front
 	glBegin(GL_QUADS);
@@ -649,22 +649,22 @@ void drawOutlines() {
 }
 
 void fogSetting() {
-	GLuint fogMode[] = { GL_EXP, GL_EXP2, GL_LINEAR }; // Хранит три типа тумана
+	GLuint fogMode[] = { GL_EXP, GL_EXP2, GL_LINEAR }; // Stores 3 fog types
 
 
-	glEnable(GL_FOG);                       // Включает туман (GL_FOG)
+	glEnable(GL_FOG);                       // Enables fog
 
-	glFogi(GL_FOG_MODE, fogMode[ff]);         // Выбираем тип тумана
+	glFogi(GL_FOG_MODE, fogMode[ff]);         // Choose fog type
 
-	glFogfv(GL_FOG_COLOR, fogColor);        // Устанавливаем цвет тумана
+	glFogfv(GL_FOG_COLOR, fogColor);        // Set fog color
 
-	glFogf(GL_FOG_DENSITY, fogDensity);          // Насколько густым будет туман
+	glFogf(GL_FOG_DENSITY, fogDensity);          // Set fog density
 
-	glHint(GL_FOG_HINT, GL_DONT_CARE);      // Вспомогательная установка тумана
+	glHint(GL_FOG_HINT, GL_DONT_CARE);
 
-	glFogf(GL_FOG_START, fogStart);             // Глубина, с которой начинается туман
+	glFogf(GL_FOG_START, fogStart);             //Fog start depth
 
-	glFogf(GL_FOG_END, fogEnd);
+	glFogf(GL_FOG_END, fogEnd);				//Fog end depth
 }
 
 void lightSetup() {
@@ -786,20 +786,7 @@ void Display() {
 	cameraAngle += cameraRotation*cameraD;
 }
 
-int main(int argc, char** argv)
-{
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH|AUX_STENCIL);
-	glutInitWindowSize(width, height);
-	glutInitWindowPosition(100, 150);
-	glutCreateWindow("GUI");
-	myInit();
-	//glutReshapeFunc(reshape);
-	glutDisplayFunc(Display);
-	glutIdleFunc(Display);
-	glutMouseFunc(mouse);
-	glEnable(GL_DEPTH_TEST);
-
+void setTextures() {
 	image1 = auxDIBImageLoadA("el.bmp");
 	image2 = auxDIBImageLoadA("fire.bmp");
 	image3 = auxDIBImageLoadA("terra.bmp");
@@ -874,6 +861,22 @@ int main(int argc, char** argv)
 		0, GL_RGB, GL_UNSIGNED_BYTE,
 		outImage->data);
 
+}
+
+int main(int argc, char** argv)
+{
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH|AUX_STENCIL);
+	glutInitWindowSize(width, height);
+	glutInitWindowPosition(100, 150);
+	glutCreateWindow("GUI");
+	myInit();
+	//glutReshapeFunc(reshape);
+	glutDisplayFunc(Display);
+	glutIdleFunc(Display);
+	glutMouseFunc(mouse);
+	glEnable(GL_DEPTH_TEST);
+	setTextures();
 	glutMainLoop();
 	return(0);
 }
